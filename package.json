@@ -2,38 +2,74 @@
   "name": "angular-crash",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
+    "ng": "nx",
+    "build": "ng build --prod",
     "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "start:dev": "ng build --watch --configuration development",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --runInBand",
+    "server": "json-server --watch db.json --port 5000"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~12.0.4",
-    "@angular/common": "~12.0.4",
-    "@angular/compiler": "~12.0.4",
-    "@angular/core": "~12.0.4",
-    "@angular/forms": "~12.0.4",
-    "@angular/platform-browser": "~12.0.4",
-    "@angular/platform-browser-dynamic": "~12.0.4",
-    "@angular/router": "~12.0.4",
-    "rxjs": "~6.6.0",
-    "tslib": "^2.1.0",
+    "@angular/animations": "~12.0.5",
+    "@angular/common": "~12.0.5",
+    "@angular/compiler": "~12.0.5",
+    "@angular/core": "~12.0.5",
+    "@angular/forms": "~12.0.5",
+    "@angular/platform-browser": "~12.0.5",
+    "@angular/platform-browser-dynamic": "~12.0.5",
+    "@angular/router": "~12.0.5",
+    "@fortawesome/angular-fontawesome": "0.9.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-brands-svg-icons": "^5.15.3",
+    "@fortawesome/free-regular-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@ngrx/effects": "^12.1.0",
+    "@ngrx/store": "^12.1.0",
+    "@ngrx/store-devtools": "^12.1.0",
+    "json-server": "^0.16.3",
+    "rxjs": "~7.1.0",
+    "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.0.4",
-    "@angular/cli": "~12.0.4",
-    "@angular/compiler-cli": "~12.0.4",
-    "@types/jasmine": "~3.6.0",
-    "@types/node": "^12.11.1",
-    "jasmine-core": "~3.7.0",
-    "karma": "~6.3.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.0.3",
-    "karma-jasmine": "~4.0.0",
-    "karma-jasmine-html-reporter": "^1.5.0",
-    "typescript": "~4.2.3"
+    "@angular-builders/jest": "^12.1.0",
+    "@angular-devkit/build-angular": "~12.0.5",
+    "@angular/cli": "~12.0.5",
+    "@angular/compiler-cli": "~12.0.5",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.12.2",
+    "jest": "^27.0.4",
+    "jest-preset-angular": "^9.0.4",
+    "prettier": "2.2.1",
+    "ts-node": "^10.0.0",
+    "typescript": "~4.2.4"
+  },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupFilesAfterEnv": [
+      "<rootDir>/setup-jest.ts"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "rootDir": ".",
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "html",
+      "json"
+    ],
+    "transform": {
+      "^.+\\.(t|j)sx|html?$": "ts-jest"
+    },
+    "testEnvironment": "jsdom",
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.test.json"
+      }
+    }
   }
 }
