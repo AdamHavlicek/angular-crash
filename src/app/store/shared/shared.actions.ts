@@ -5,7 +5,7 @@ export const SET_ERROR_MESSAGE = '[shared state] set error message';
 
 export const setLoadingSpinner = createAction(
     SET_LOADING_ACTION,
-    props<{ status: boolean }>()
+    props<{ showSpinner: boolean }>()
 );
 export const setErrorMessage = createAction(
     SET_ERROR_MESSAGE,

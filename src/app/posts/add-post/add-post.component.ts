@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { firstValueFrom } from 'rxjs';
 import { Post } from 'src/app/model/post.model';
 import { AppState } from 'src/app/store/app.state';
-import { addPost } from '../state/posts.actions';
+import { addPostStart } from '../state/posts.actions';
+import { getMaxPostId } from '../state/posts.selector';
 
 @Component({
     selector: 'app-add-post',
@@ -42,7 +44,7 @@ export class AddPostComponent implements OnInit {
         return '';
     }
 
-    onAddPost(): void {
+    async onAddPost(): Promise<void> {
         if (!this.postForm.valid) {
             return;
         }
@@ -52,6 +54,6 @@ export class AddPostComponent implements OnInit {
             description: this.postForm.value.description,
         };
 
-        this.store.dispatch(addPost({ post }));
+        this.store.dispatch(addPostStart({ post }));
     }
 }

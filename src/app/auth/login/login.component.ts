@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
       const email = this.loginForm.value.email
       const password = this.loginForm.value.password
 
-      this.store.dispatch(setLoadingSpinner({status: true})) // should i really dispatch two actions?!
       this.store.dispatch(loginStart({email, password}))
     }
 

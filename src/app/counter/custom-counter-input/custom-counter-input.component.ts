@@ -24,7 +24,7 @@ export class CustomCounterInputComponent implements OnInit {
   }
 
   onAdd(): void {
-    this.store.dispatch(customIncrement({value: +this.value}))
+    this.store.dispatch(customIncrement({value: !!this.value ? +this.value : 0}))
   }
   
   onChangeChannelName(): void {
