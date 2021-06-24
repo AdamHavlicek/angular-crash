@@ -2025,6 +2025,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ngrx/entity@npm:^12.1.0":
+  version: 12.1.0
+  resolution: "@ngrx/entity@npm:12.1.0"
+  dependencies:
+    tslib: ^2.0.0
+  peerDependencies:
+    "@angular/core": ^12.0.0
+    "@ngrx/store": 12.1.0
+    rxjs: ^6.5.3
+  checksum: 251b4a6d5a4e2600cfd3a5e13ef6fcbd75bd3146014b1571cecd43b4b5a6cfb6a2694087c0153412fb42c4ca91b95eb2820e9822ab9a475b2770e48cec80721f
+  languageName: node
+  linkType: hard
+
 "@ngrx/router-store@npm:^12.1.0":
   version: 12.1.0
   resolution: "@ngrx/router-store@npm:12.1.0"
@@ -2865,6 +2878,7 @@ __metadata:
     "@fortawesome/free-regular-svg-icons": ^5.15.3
     "@fortawesome/free-solid-svg-icons": ^5.15.3
     "@ngrx/effects": ^12.1.0
+    "@ngrx/entity": ^12.1.0
     "@ngrx/router-store": ^12.1.0
     "@ngrx/store": ^12.1.0
     "@ngrx/store-devtools": ^12.1.0

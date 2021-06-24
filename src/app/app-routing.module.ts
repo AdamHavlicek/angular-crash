@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { SinglePostComponent } from './posts/single-post/single-post.component';
 import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
@@ -24,6 +25,10 @@ const routes: Routes = [
           const module = await import('./posts/posts.module')
           return module.PostsModule
         }
+    },
+    {
+        path: 'posts/detail/:id',
+        component: SinglePostComponent
     },
     {
         path: 'auth',

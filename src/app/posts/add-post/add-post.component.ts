@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { firstValueFrom } from 'rxjs';
 import { Post } from 'src/app/model/post.model';
 import { AppState } from 'src/app/store/app.state';
 import { addPostStart } from '../state/posts.actions';
-import { getMaxPostId } from '../state/posts.selector';
 
 @Component({
     selector: 'app-add-post',
