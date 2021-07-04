@@ -12,10 +12,12 @@ import {
     loginFailure,
     loginStart,
     loginSuccess,
-    signupFailure,
-    signupStart,
-    signupSuccess,
+    signUpFailure,
+    signUpStart,
+    signUpSuccess,
 } from './auth.actions';
+import { ErrorState, LoadingState } from './auth.state';
+// import { ErrorState, LoadingState } from './auth.state';
 
 @Injectable()
 export class AuthEffects {
@@ -31,7 +33,7 @@ export class AuthEffects {
             ofType(loginStart),
             exhaustMap((action) => {
                 return this.authService
-                    .login(action.email, action.password)
+                    .login(action.result.email, action.result.password)
                     .pipe(
                         map((data) => {
                             // this.store.dispatch(
@@ -39,13 +41,31 @@ export class AuthEffects {
                             // );
                             const user = this.authService.formatUser(data);
                             this.authService.setUserToLocalStorage(user);
-                            return loginSuccess({ user, redirect: true });
+                            return loginSuccess({
+                                result: {
+                                    user,
+                                    redirect: true,
+                                },
+                                callState: LoadingState.LOADED,
+                                // isLoaded: true,
+                                // isLoading: false,
+                                // errorMessage: null
+                            });
                         }),
                         catchError((err, caught) => {
-                            const errorMessage = this.authService.getErrorMessage(
-                                err.error.error.message
+                            const errorMessage =
+                                this.authService.getErrorMessage(
+                                    err.error.error.message
+                                );
+                            return of(
+                                loginFailure({
+                                    result: null,
+                                    callState: { errorMessage } as ErrorState,
+                                    // isLoaded: false,
+                                    // isLoading: false,
+                                    // errorMessage
+                                })
                             );
-                            return of(loginFailure({ reason: errorMessage }));
                         })
                     );
             })
@@ -55,9 +75,9 @@ export class AuthEffects {
     redirectToHomePage$ = createEffect(
         () => {
             return this.actions$.pipe(
-                ofType(loginSuccess, signupSuccess),
+                ofType(loginSuccess, signUpSuccess),
                 tap((action) => {
-                    if (action.redirect) {
+                    if (action.result.redirect) {
                         this.router.navigate(['']);
                     }
                 })
@@ -68,21 +88,36 @@ export class AuthEffects {
 
     signup$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(signupStart),
+            ofType(signUpStart),
             exhaustMap((action) => {
                 return this.authService
-                    .signup(action.email, action.password)
+                    .signup(action.result.email, action.result.password)
                     .pipe(
                         map((data) => {
                             const user = this.authService.formatUser(data);
                             this.authService.setUserToLocalStorage(user);
-                            return signupSuccess({ user, redirect: true });
+                            return signUpSuccess({
+                                result: { user, redirect: true },
+                                callState: LoadingState.LOADED,
+                                // isLoaded: true,
+                                // isLoading: false,
+                                // errorMessage: null
+                            });
                         }),
                         catchError((err, caught) => {
-                            const errorMessage = this.authService.getErrorMessage(
-                                err.error.error.message
+                            const errorMessage =
+                                this.authService.getErrorMessage(
+                                    err.error.error.message
+                                );
+                            return of(
+                                signUpFailure({
+                                    result: null,
+                                    callState: { errorMessage },
+                                    // isLoading: false,
+                                    // isLoaded: false,
+                                    // errorMessage,
+                                })
                             );
-                            return of(signupFailure({ reason: errorMessage }));
                         })
                     );
             })
@@ -95,7 +130,25 @@ export class AuthEffects {
                 ofType(autoLogin),
                 mergeMap((action) => {
                     const user = this.authService.getUserFromLocalStorage();
-                    return of(loginSuccess({ user, redirect: false }));
+                    if (user) {
+                        return of(
+                            loginSuccess({
+                                result: { user, redirect: false },
+                                callState: LoadingState.LOADED,
+                                // isLoaded: true,
+                                // isLoading: false,
+                                // errorMessage: null
+                            })
+                        );
+                    } else {
+                        return of(loginFailure({
+                            result: null,
+                            callState: LoadingState.LOADED,
+                            // isLoaded: false,
+                            // isLoading: false,
+                            // errorMessage: null
+                        }))
+                    }
                 })
             );
         },

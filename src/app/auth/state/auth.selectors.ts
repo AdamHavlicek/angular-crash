@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { AuthState } from "./auth.state";
+import { AuthState, getError, LoadingState } from "./auth.state";
 
 export const AUTH_STATE_NAME = 'auth';
 
@@ -12,4 +12,12 @@ export const isAuthenticated = createSelector(getAuthState, state => {
 
 export const getToken = createSelector(getAuthState, state => {
     return state.user?.userToken
+})
+
+export const getCallState = createSelector(getAuthState, state => {
+    return state.callState === LoadingState.LOADING
+})
+
+export const getErrorMessage = createSelector(getAuthState, state => {
+    return getError(state.callState)
 })

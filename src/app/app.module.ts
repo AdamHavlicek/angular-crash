@@ -18,7 +18,12 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomSerializer } from './store/router/custom-serializer';
 
 @NgModule({
-    declarations: [AppComponent, HomeComponent, HeaderComponent, LoadingSpinnerComponent],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        HeaderComponent,
+        // LoadingSpinnerComponent,
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -30,14 +35,16 @@ import { CustomSerializer } from './store/router/custom-serializer';
             autoPause: true,
         }),
         StoreRouterConnectingModule.forRoot({
-            serializer: CustomSerializer
+            serializer: CustomSerializer,
         }),
     ],
-    providers: [{
-        provide: HTTP_INTERCEPTORS,
-        useClass: AuthTokenInterceptor,
-        multi: true
-    }],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthTokenInterceptor,
+            multi: true,
+        },
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

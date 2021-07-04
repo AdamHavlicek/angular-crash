@@ -1,8 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 import { User } from 'src/app/model/user.model';
+import { ResultState } from './auth.state';
 
 export const AUTO_LOGIN_ACTION = '[auth page] auto login'
 export const LOGOUT_ACTION = '[auth page] logout'
+export const RESET_CALLSTATE = '[auth page] reset callState'
 
 export const LOGIN_START = '[auth page] login start';
 export const LOGIN_SUCCESS = '[auth page] login success';
@@ -14,32 +16,32 @@ export const SIGNUP_FAILURE = '[auth page] sign-up failure';
 
 export const loginStart = createAction(
     LOGIN_START,
-    props<{
+    props<ResultState<{
         email: string;
         password: string;
-    }>()
+    }>>()
 );
 export const loginSuccess = createAction(
     LOGIN_SUCCESS,
-    props<{ user: User, redirect: boolean }>()
+    props<ResultState<{ user: User, redirect: boolean }>>()
 );
 
 export const loginFailure = createAction(
     LOGIN_FAILURE,
-    props<{reason: string}>()
+    props<ResultState<null>>()
 )
 
-export const signupStart = createAction(
+export const signUpStart = createAction(
     SIGNUP_START,
-    props<{ email: string; password: string }>()
+    props<ResultState<{ email: string; password: string }>>()
 );
-export const signupSuccess = createAction(
+export const signUpSuccess = createAction(
     SIGNUP_SUCCESS,
-    props<{ user: User, redirect: boolean }>()
+    props<ResultState<{ user: User, redirect: boolean }>>()
 );
-export const signupFailure = createAction(
+export const signUpFailure = createAction(
     SIGNUP_FAILURE, 
-    props<{reason: string}>()
+    props<ResultState<{reason: string}>>()
 )
 
 export const autoLogin = createAction(
@@ -47,4 +49,7 @@ export const autoLogin = createAction(
 )
 export const autoLogout = createAction(
     LOGOUT_ACTION
+)
+export const resetCallState = createAction(
+    RESET_CALLSTATE
 )

@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from './state/auth.effects';
 import { SignupComponent } from './signup/signup.component';
+import { LoadingSpinnerComponent } from '../shared/components/loading-spinner/loading-spinner.component';
 
 const routes: Routes = [
     {
@@ -28,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [LoginComponent, SignupComponent],
+    declarations: [LoginComponent, SignupComponent, LoadingSpinnerComponent],
     imports: [
         CommonModule,
         ReactiveFormsModule,

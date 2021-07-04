@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-loading-spinner',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./loading-spinner.component.sass']
 })
 export class LoadingSpinnerComponent implements OnInit {
+
+  @Input() showSpinner: Observable<boolean>
 
   constructor() { }
 
