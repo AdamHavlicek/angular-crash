@@ -30,7 +30,7 @@ export const getPostById = createSelector(
     getPostsEntities,
     getCurrentRoute,
     (posts, route: RouterStateUrl) => {
-        return posts ? posts[route.params.id] : null;
+        return posts[route.params.id]
     }
 );
 

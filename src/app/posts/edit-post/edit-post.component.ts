@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
-import { Subscription } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
+import { distinctUntilChanged, exhaustMap, map, tap } from 'rxjs/operators'
 import { Post } from 'src/app/model/post.model'
 import { AppState } from 'src/app/store/app.state'
 import { updatePost } from '../state/posts.actions'
@@ -10,29 +11,18 @@ import { getPostById } from '../state/posts.selector'
 @Component({
     selector: 'app-edit-post',
     templateUrl: './edit-post.component.html',
-    styleUrls: ['./edit-post.component.sass']
+    styleUrls: ['./edit-post.component.sass'],
 })
-export class EditPostComponent implements OnInit, OnDestroy {
-    post: Post
+export class EditPostComponent implements OnInit {
+    post$: Observable<Post>
     postForm: FormGroup
-    postSubscription: Subscription
 
     constructor(private readonly store: Store<AppState>) {}
 
     ngOnInit(): void {
         this.createForm()
-        this.postSubscription = this.store
+        this.post$ = this.store
             .select(getPostById)
-            .subscribe((post) => {
-                if (!!!post) {
-                    return
-                }
-                this.post = post
-                this.postForm.patchValue({
-                    title: post.title,
-                    description: post.description
-                })
-            })
         // this.route.paramMap.subscribe((params) => {
         //     const id = params.get('id');
         //     this.store.select(getPostById(id)).subscribe((data) => {
@@ -42,19 +32,12 @@ export class EditPostComponent implements OnInit, OnDestroy {
         // });
     }
 
-    ngOnDestroy(): void {
-        if (this.postSubscription) {
-            this.postSubscription.unsubscribe()
-        }
-    }
-
     onSubmit(): void {
         if (!this.postForm.valid) {
             return
         }
 
         const post: Post = {
-            ...this.post,
             title: this.postForm.value.title,
             description: this.postForm.value.description
         }

@@ -168,7 +168,7 @@ module.exports = {
             "project": [
               "tsconfig.app.json",
               "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+            //   "e2e/tsconfig.json"
             ],
             "createDefaultProgram": true
           },

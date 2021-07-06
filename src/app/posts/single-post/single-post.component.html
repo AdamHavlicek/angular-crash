@@ -1,7 +1,8 @@
 <div>PostDetails</div>
 <hr>
-<div *ngIf="post | async as postData">
+<div *ngIf="post$ | async as postData">
     <div>
+        {{ this.route$ | async | json}}
         Id: {{postData.id}}
     </div>
     <div>

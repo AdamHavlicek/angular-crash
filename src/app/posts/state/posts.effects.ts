@@ -1,19 +1,19 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { RouterNavigatedAction, ROUTER_NAVIGATION } from '@ngrx/router-store';
-import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
+import { Injectable } from '@angular/core'
+import { Router } from '@angular/router'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
+import { RouterNavigatedAction, ROUTER_NAVIGATION } from '@ngrx/router-store'
+import { Store } from '@ngrx/store'
+import { of } from 'rxjs'
 import {
     filter,
     map,
     mergeMap,
     switchMap,
-    withLatestFrom,
-} from 'rxjs/operators';
-import { Post } from 'src/app/model/post.model';
-import { PostsService } from 'src/app/services/posts.service';
-import { AppState } from 'src/app/store/app.state';
+    withLatestFrom
+} from 'rxjs/operators'
+import { Post } from 'src/app/model/post.model'
+import { PostsService } from 'src/app/services/posts.service'
+import { AppState } from 'src/app/store/app.state'
 import {
     addPostStart,
     addPostSuccess,
@@ -22,9 +22,9 @@ import {
     loadPosts,
     loadPostsSuccess,
     updatePost,
-    updatePostSuccess,
-} from './posts.actions';
-import { getPostsEntities } from './posts.selector';
+    updatePostSuccess
+} from './posts.actions'
+import { getPostsEntities } from './posts.selector'
 
 @Injectable()
 export class PostsEffects {
@@ -41,12 +41,12 @@ export class PostsEffects {
             mergeMap((action) => {
                 return this.postsService.getPosts().pipe(
                     map((data) => {
-                        return loadPostsSuccess({ posts: data });
+                        return loadPostsSuccess({ posts: data })
                     })
-                );
+                )
             })
-        );
-    });
+        )
+    })
 
     addPost$ = createEffect(() => {
         return this.actions$.pipe(
@@ -54,13 +54,13 @@ export class PostsEffects {
             mergeMap((action) => {
                 return this.postsService.addPost(action.post).pipe(
                     map((data) => {
-                        const post = { ...action.post, id: data.name };
-                        return addPostSuccess({ post });
+                        const post = { ...action.post, id: data.name }
+                        return addPostSuccess({ post })
                     })
-                );
+                )
             })
-        );
-    });
+        )
+    })
 
     updatePost$ = createEffect(() => {
         return this.actions$.pipe(
@@ -70,14 +70,14 @@ export class PostsEffects {
                     map((data) => {
                         const updatedPostData: Post = {
                             ...action.post,
-                            id: action.post.id,
-                        };
-                        return updatePostSuccess({ post: updatedPostData });
+                            id: action.post.id
+                        }
+                        return updatePostSuccess({ post: updatedPostData })
                     })
-                );
+                )
             })
-        );
-    });
+        )
+    })
 
     // redirect$ = createEffect(
     //     () => {
@@ -97,35 +97,37 @@ export class PostsEffects {
             switchMap((action) => {
                 return this.postsService.deletePost(action.id).pipe(
                     map((data) => {
-                        return deletePostSuccess({ id: action.id });
+                        return deletePostSuccess({ id: action.id })
                     })
-                );
+                )
             })
-        );
-    });
+        )
+    })
 
     getSinglePost$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(ROUTER_NAVIGATION),
             filter((r: RouterNavigatedAction) => {
-                return r.payload.routerState.url.startsWith('/posts/detail');
+                return r.payload.routerState.url.startsWith('/posts/detail')
             }),
             map((r: RouterNavigatedAction) => {
-                return r.payload.routerState['params']['id'];
+                return r.payload.routerState['params']['id']
             }),
             withLatestFrom(this.store.select(getPostsEntities)),
             switchMap(([id, posts]) => {
                 if (Object.keys(posts).length === 0) {
                     return this.postsService.getPostById(id).pipe(
                         map((post) => {
-                            return updatePostSuccess({ post: { ...post, id } });
+                            return updatePostSuccess({ post: { ...post, id } })
                         })
-                    );
+                    )
                 }
-                return of(updatePostSuccess({
-                    post: posts[id],
-                }));
+                return of(
+                    updatePostSuccess({
+                        post: posts[id]
+                    })
+                )
             })
-        );
-    });
+        )
+    })
 }
