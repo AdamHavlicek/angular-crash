@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
 import { EMPTY, Observable } from 'rxjs';
 import { catchError, concatMap, distinctUntilChanged } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';

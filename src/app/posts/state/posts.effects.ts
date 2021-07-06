@@ -5,7 +5,6 @@ import { RouterNavigatedAction, ROUTER_NAVIGATION } from '@ngrx/router-store';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import {
-    combineLatestWith,
     filter,
     map,
     mergeMap,
@@ -25,7 +24,7 @@ import {
     updatePost,
     updatePostSuccess,
 } from './posts.actions';
-import { getPosts, getPostsEntities } from './posts.selector';
+import { getPostsEntities } from './posts.selector';
 
 @Injectable()
 export class PostsEffects {

@@ -40,10 +40,15 @@
   "devDependencies": {
     "@angular-builders/jest": "^12.1.0",
     "@angular-devkit/build-angular": "~12.1.1",
+    "@angular-eslint/schematics": "^12.2.0",
     "@angular/cli": "~12.1.1",
     "@angular/compiler-cli": "~12.1.1",
     "@types/jest": "^26.0.23",
     "@types/node": "^16.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/eslint-plugin-tslint": "^4.28.2",
+    "@typescript-eslint/parser": "^4.28.2",
+    "eslint": "^7.30.0",
     "jest": "^27.0.6",
     "jest-preset-angular": "^9.0.4",
     "prettier": "2.3.2",
@@ -74,5 +79,11 @@
         "tsConfig": "tsconfig.test.json"
       }
     }
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "tabWidth": 4,
+    "semi": false,
+    "singleQuote": true
   }
 }

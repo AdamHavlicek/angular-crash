@@ -24,7 +24,7 @@ export class AuthEffects {
     constructor(
         private readonly actions$: Actions,
         private readonly authService: AuthService,
-        private store: Store<AppState>,
+        private readonly store: Store<AppState>,
         private readonly router: Router
     ) {}
 
@@ -53,10 +53,16 @@ export class AuthEffects {
                             });
                         }),
                         catchError((err, caught) => {
-                            const errorMessage =
-                                this.authService.getErrorMessage(
+                            let errorMessage;
+                            if (err?.error?.error?.message) {
+                                errorMessage = this.authService.getErrorMessage(
                                     err.error.error.message
                                 );
+                            } else {
+                                errorMessage =
+                                    this.authService.getErrorMessage(err);
+                            }
+
                             return of(
                                 loginFailure({
                                     result: null,
@@ -141,13 +147,15 @@ export class AuthEffects {
                             })
                         );
                     } else {
-                        return of(loginFailure({
-                            result: null,
-                            callState: LoadingState.LOADED,
-                            // isLoaded: false,
-                            // isLoading: false,
-                            // errorMessage: null
-                        }))
+                        return of(
+                            loginFailure({
+                                result: null,
+                                callState: LoadingState.LOADED,
+                                // isLoaded: false,
+                                // isLoading: false,
+                                // errorMessage: null
+                            })
+                        );
                     }
                 })
             );

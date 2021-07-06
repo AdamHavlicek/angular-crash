@@ -1,5 +1,4 @@
 import { createReducer, on } from '@ngrx/store';
-import { Action } from 'rxjs/internal/scheduler/Action';
 import {
     autoLogout,
     loginFailure,

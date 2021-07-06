@@ -108,5 +108,8 @@
       }
     }
   },
-  "defaultProject": "angular-crash"
+  "defaultProject": "angular-crash",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
