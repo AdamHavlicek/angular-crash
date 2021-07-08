@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     errorMessage$: Observable<string | null>;
 
     constructor(
-        private store: Store<AppState>,
+        private readonly store: Store<AppState>,
         private readonly loginStore: LoginStore
     ) {}
 

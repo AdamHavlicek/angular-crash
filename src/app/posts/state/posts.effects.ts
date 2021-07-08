@@ -5,6 +5,7 @@ import { RouterNavigatedAction, ROUTER_NAVIGATION } from '@ngrx/router-store'
 import { Store } from '@ngrx/store'
 import { of } from 'rxjs'
 import {
+    catchError,
     filter,
     map,
     mergeMap,
@@ -119,7 +120,7 @@ export class PostsEffects {
                     return this.postsService.getPostById(id).pipe(
                         map((post) => {
                             return updatePostSuccess({ post: { ...post, id } })
-                        })
+                        }),
                     )
                 }
                 return of(

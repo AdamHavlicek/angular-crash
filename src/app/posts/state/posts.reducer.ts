@@ -1,6 +1,12 @@
-import { createReducer, on } from '@ngrx/store';
-import { initialState, postsAdapter } from './posts.state';
-import { addPostSuccess, deletePostSuccess, loadPostsSuccess, updatePostSuccess } from './posts.actions';
+import { createReducer, on } from '@ngrx/store'
+import { initialState, postsAdapter } from './posts.state'
+import {
+    addPostSuccess,
+    deletePostSuccess,
+    loadPostsSuccess,
+    loadPostSuccess,
+    updatePostSuccess
+} from './posts.actions'
 
 const _postReducer = createReducer(
     initialState,
@@ -41,10 +47,12 @@ const _postReducer = createReducer(
         //     posts: [...action.posts]
         // }
         return postsAdapter.setAll(action.posts, state)
+    }),
+    on(loadPostSuccess, (state, action) => {
+        return postsAdapter.addOne(action.post, state)
     })
-
-);
+)
 
 export function postsReducer(state, action) {
-    return _postReducer(state, action);
+    return _postReducer(state, action)
 }

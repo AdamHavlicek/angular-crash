@@ -11,9 +11,9 @@ import { EditPostComponent } from './edit-post/edit-post.component'
 import { PostsListComponent } from './posts-list/posts-list.component'
 import { PostsEffects } from './state/posts.effects'
 import { postsReducer } from './state/posts.reducer'
-import { POSTS_STATE_NAME } from './state/posts.selector'
 import { SinglePostComponent } from './single-post/single-post.component'
 import { ConnectFormDirective } from '../shared/directives/connect-form.directive'
+import { StateNames } from '../store/app.state'
 
 const routes: Routes = [
     {
@@ -26,10 +26,16 @@ const routes: Routes = [
             },
             {
                 path: 'edit/:id',
-                component: EditPostComponent
+                component: EditPostComponent,
             }
-        ]
-    }
+        ],
+
+    },
+    {
+        path: 'detail/:id',
+        component: SinglePostComponent,
+
+    },
 ]
 
 @NgModule({
@@ -43,7 +49,7 @@ const routes: Routes = [
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
-        StoreModule.forFeature(POSTS_STATE_NAME, postsReducer),
+        StoreModule.forFeature(StateNames.POSTS_STATE_NAME, postsReducer),
         ReactiveFormsModule,
         EffectsModule.forFeature([PostsEffects])
     ],

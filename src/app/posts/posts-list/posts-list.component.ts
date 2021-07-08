@@ -1,30 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { Post } from 'src/app/model/post.model';
-import { AppState } from 'src/app/store/app.state';
-import { deletePost, loadPosts } from '../state/posts.actions';
-import { getPosts } from '../state/posts.selector';
+import { Component, OnInit } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { Observable } from 'rxjs'
+import { Post } from 'src/app/model/post.model'
+import { AppState } from 'src/app/store/app.state'
+import { deletePost, loadPosts } from '../state/posts.actions'
+import { getPosts } from '../state/posts.selector'
 
 @Component({
-  selector: 'app-posts-list',
-  templateUrl: './posts-list.component.html',
-  styleUrls: ['./posts-list.component.sass']
+    selector: 'app-posts-list',
+    templateUrl: './posts-list.component.html',
+    styleUrls: ['./posts-list.component.sass']
 })
 export class PostsListComponent implements OnInit {
-  posts: Observable<Array<Post>>
-  
-  constructor(private store: Store<AppState>) { }
+    posts: Observable<Array<Post>>
 
-  ngOnInit(): void {
-    this.posts = this.store.select(getPosts)
-    this.store.dispatch(loadPosts())
-  }
+    constructor(private readonly store: Store<AppState>) {}
 
-  onDeletePost(id: string) {
-    if (confirm('Are you sure?')) {
-      this.store.dispatch(deletePost({ id }))
+    ngOnInit(): void {
+        this.posts = this.store.select(getPosts)
+        this.store.dispatch(loadPosts())
     }
-  }
 
+    onDeletePost(id: string) {
+        if (confirm('Are you sure?')) {
+            this.store.dispatch(deletePost({ id }))
+        }
+    }
 }

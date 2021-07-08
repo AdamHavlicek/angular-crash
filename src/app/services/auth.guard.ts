@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import {
     ActivatedRouteSnapshot,
     CanActivate,
@@ -8,13 +8,13 @@ import {
     Router,
     RouterStateSnapshot,
     UrlSegment,
-    UrlTree,
-} from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { exhaustMap, map } from 'rxjs/operators';
-import { isAuthenticated } from '../auth/state/auth.selectors';
-import { AppState } from '../store/app.state';
+    UrlTree
+} from '@angular/router'
+import { Store } from '@ngrx/store'
+import { Observable } from 'rxjs'
+import { exhaustMap, map } from 'rxjs/operators'
+import { isAuthenticated } from '../auth/state/auth.selectors'
+import { AppState } from '../store/app.state'
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate, CanLoad, CanActivateChild {
@@ -30,33 +30,40 @@ export class AuthGuard implements CanActivate, CanLoad, CanActivateChild {
         | UrlTree
         | Observable<boolean | UrlTree>
         | Promise<boolean | UrlTree> {
-            return this.getIsUserAuthenticated()
-        }
+        return this.getIsUserAuthenticated()
+    }
 
     getIsUserAuthenticated() {
         return this.store.select(isAuthenticated).pipe(
             map((authenticate) => {
                 if (!authenticate) {
-                    return this.router.createUrlTree(['auth']);
+                    return this.router.createUrlTree(['auth'])
                 } else {
-                    return authenticate;
+                    return authenticate
                 }
             })
-        );
+        )
     }
 
     canLoad(
         route: Route,
-        segments: UrlSegment[]
+        segments: Array<UrlSegment>
     ):
         | boolean
         | UrlTree
         | Observable<boolean | UrlTree>
         | Promise<boolean | UrlTree> {
-        return this.getIsUserAuthenticated();
+        return this.getIsUserAuthenticated()
     }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        return this.getIsUserAuthenticated();
+    canActivate(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ):
+        | boolean
+        | UrlTree
+        | Observable<boolean | UrlTree>
+        | Promise<boolean | UrlTree> {
+        return this.getIsUserAuthenticated()
     }
 }
