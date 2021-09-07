@@ -53,7 +53,7 @@ export class AuthEffects {
                                 // errorMessage: null
                             })
                         }),
-                        catchError((err: HttpErrorResponse, caught) => {
+                        catchError((err: HttpErrorResponse, _caught) => {
                             let errorMessage: string
                             if (!!err.error) {
                                 errorMessage = this.authService.getErrorMessage(

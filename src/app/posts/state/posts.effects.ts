@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
-import { Actions, createEffect, ofType } from '@ngrx/effects'
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects'
 import { RouterNavigatedAction, ROUTER_NAVIGATION } from '@ngrx/router-store'
 import { Store } from '@ngrx/store'
 import { of } from 'rxjs'
 import {
-    catchError,
     filter,
     map,
     mergeMap,
     switchMap,
-    withLatestFrom
 } from 'rxjs/operators'
 import { Post } from 'src/app/model/post.model'
 import { PostsService } from 'src/app/services/posts.service'
@@ -114,7 +112,7 @@ export class PostsEffects {
             map((r: RouterNavigatedAction) => {
                 return r.payload.routerState['params']['id']
             }),
-            withLatestFrom(this.store.select(getPostsEntities)),
+            concatLatestFrom(_ => this.store.select(getPostsEntities)),
             switchMap(([id, posts]) => {
                 if (Object.keys(posts).length === 0) {
                     return this.postsService.getPostById(id).pipe(
