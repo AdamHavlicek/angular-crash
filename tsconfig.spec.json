@@ -6,7 +6,10 @@
     "outDir": "./out-tsc/spec",
     "types": [
       "jest"
-    ]
+    ],
+    "paths": {
+      "src/*": ["src/*"]
+    }
   },
   "files": [
     "src/test.ts",

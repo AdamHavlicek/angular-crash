@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component'
 import { AuthGuard } from './services/auth.guard'
 import { NotFoundComponent } from './shared/components/not-found/not-found.component'
 
-const routes: Routes = [
+export const routes: Routes = [
     {
         path: '',
         component: HomeComponent,

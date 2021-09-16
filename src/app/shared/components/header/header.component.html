@@ -12,16 +12,16 @@
         <li class="nav-item">
           <a class="nav-link"[routerLinkActive]="['active']"  [routerLink]="['counter']">Counter</a>
         </li>
-        <li class="nav-item" *ngIf="isAuthenticated | async">
+        <li class="nav-item" *ngIf="isAuthenticated$| async">
           <a class="nav-link"[routerLinkActive]="['active']"  [routerLink]="['posts']">Posts</a>
         </li>
-        <li class="nav-item" *ngIf="!(isAuthenticated | async)">
+        <li class="nav-item" *ngIf="!(isAuthenticated$ | async)">
           <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['auth', 'login']">Login</a>
         </li>
-        <li class="nav-item" *ngIf="isAuthenticated | async">
+        <li class="nav-item" *ngIf="isAuthenticated$ | async">
           <a class="nav-link" [routerLinkActive]="['active']" [ngStyle]="{'cursor': 'pointer'}" (click)="onLogout()">Logout</a>
         </li>
-        <li class="nav-item" *ngIf="!(isAuthenticated | async)">
+        <li class="nav-item" *ngIf="!(isAuthenticated$ | async)">
           <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['auth', 'sign-up']">Sign up</a>
         </li>
       </ul>
