@@ -1,18 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, Input } from '@angular/core'
+import { Observable } from 'rxjs'
 
 @Component({
-  selector: 'app-loading-spinner',
-  templateUrl: './loading-spinner.component.html',
-  styleUrls: ['./loading-spinner.component.sass']
+    selector: 'app-loading-spinner',
+    templateUrl: './loading-spinner.component.html',
+    styleUrls: ['./loading-spinner.component.sass']
 })
-export class LoadingSpinnerComponent implements OnInit {
+export class LoadingSpinnerComponent {
+    @Input() showSpinner: Observable<boolean>
 
-  @Input() showSpinner: Observable<boolean>
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+    constructor() {}
 }

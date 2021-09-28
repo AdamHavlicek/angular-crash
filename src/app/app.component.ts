@@ -14,8 +14,6 @@ import { getCurrentRoute, getRouterState } from './store/router/router.selector'
 })
 export class AppComponent implements OnInit {
     title = 'angular-crash'
-    showLoading$: Observable<boolean>
-    errorMessage$: Observable<string>
     route$: Observable<RouterStateUrl>
 
     constructor(private readonly store: Store<AppState>) {}

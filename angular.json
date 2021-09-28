@@ -84,7 +84,8 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-crash:build"
+            "browserTarget": "angular-crash:build",
+            "extraWebpackConfig": "webpack.config.js"
           }
         },
         "test": {

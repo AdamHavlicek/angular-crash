@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { CounterStore } from '../state/counter.store';
+import { Component, OnInit } from '@angular/core'
+import { CounterStore } from '../state/counter.store'
 
 @Component({
     selector: 'app-counter-buttons',
     templateUrl: './counter-buttons.component.html',
-    styleUrls: ['./counter-buttons.component.sass'],
+    styleUrls: ['./counter-buttons.component.sass']
 })
-export class CounterButtonsComponent implements OnInit {
+export class CounterButtonsComponent {
     constructor(private readonly counterStore: CounterStore) {}
-
-    ngOnInit(): void {}
 
     onIncrement(): void {
         this.counterStore.increment()

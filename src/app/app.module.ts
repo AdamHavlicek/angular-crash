@@ -16,6 +16,9 @@ import { AuthTokenInterceptor } from './services/auth-token.interceptor'
 import { StoreRouterConnectingModule } from '@ngrx/router-store'
 import { CustomSerializer } from './store/router/custom-serializer';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component'
+import { APOLLO_OPTIONS } from 'apollo-angular'
+import { InMemoryCache } from '@apollo/client/core'
+import { HttpLink } from 'apollo-angular/http'
 
 @NgModule({
     declarations: [
@@ -23,7 +26,6 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
         HomeComponent,
         HeaderComponent,
         NotFoundComponent
-        // LoadingSpinnerComponent,
     ],
     imports: [
         BrowserModule,
@@ -44,6 +46,18 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
             provide: HTTP_INTERCEPTORS,
             useClass: AuthTokenInterceptor,
             multi: true
+        },
+        {
+            provide: APOLLO_OPTIONS,
+            useFactory: (httpLink: HttpLink) => {
+                return {
+                    cache: new InMemoryCache(),
+                    link: httpLink.create({
+                        uri: 'https://api.spacex.land/graphql'
+                    })
+                }
+            },
+            deps: [HttpLink]
         }
     ],
     bootstrap: [AppComponent]

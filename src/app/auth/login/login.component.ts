@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { ComponentStore } from '@ngrx/component-store'
 import { Store } from '@ngrx/store'
 import { Observable, of } from 'rxjs'
 import { AppState } from 'src/app/store/app.state'
 import { loginStart, resetCallState } from '../state/auth.actions'
 import { getCallState, getErrorMessage } from '../state/auth.selectors'
 import { LoadingState } from '../state/auth.state'
-import { LoginState, LoginStore } from './login.component.store'
+import { LoginStore } from './login.component.store'
 
 @Component({
     selector: 'app-login',
