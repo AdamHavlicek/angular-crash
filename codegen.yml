@@ -1,11 +1,15 @@
 overwrite: true
 schema: "https://api.spacex.land/graphql/"
+documents: "src/**/*.graphql"
 generates:
   src/generated/spacex-graphql.ts:
     plugins:
       - "typescript"
       - "typescript-operations"
       - "typescript-apollo-angular"
+    config:
+      namingConvention:
+        transformUnderscore: true
   ./graphql.schema.json:
     plugins:
       - "introspection"

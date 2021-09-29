@@ -1,1 +1,10 @@
-<p>home works!</p>
+<div *ngIf="launchesUpcoming$ | async as launchesUpcoming">
+    <ul *ngFor="let launchUpcoming of launchesUpcoming">
+        <li>{{launchUpcoming.id}}</li>
+        <li>{{launchUpcoming.mission_name}}</li>
+        <li>{{launchUpcoming.rocket.rocket_name}}</li>
+        <li>{{launchUpcoming.launch_year}}</li>
+        <li>{{launchUpcoming.launch_date_unix  * 1000 | date:'medium'}}</li>
+        <li>{{launchUpcoming.launch_site.site_name}}</li>
+    </ul>
+</div>

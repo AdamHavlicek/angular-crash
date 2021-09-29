@@ -1,0 +1,14 @@
+query LaunchesUpcoming {
+  launchesUpcoming {
+    id
+    launch_site {
+      site_name
+    }
+    launch_date_unix
+    launch_year
+    mission_name
+    rocket {
+      rocket_name
+    }
+  }
+}
