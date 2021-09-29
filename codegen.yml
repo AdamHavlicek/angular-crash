@@ -8,6 +8,9 @@ generates:
       - "typescript-operations"
       - "typescript-apollo-angular"
     config:
+      querySuffix: "QueryService"
+      mutationSuffix: "MutationService"
+      subscription: "SubscriptionService"
       namingConvention:
         transformUnderscore: true
   ./graphql.schema.json:

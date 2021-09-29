@@ -1344,7 +1344,7 @@ export const LaunchesUpcomingDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class LaunchesUpcomingGQL extends Apollo.Query<LaunchesUpcomingQuery, LaunchesUpcomingQueryVariables> {
+  export class LaunchesUpcomingQueryService extends Apollo.Query<LaunchesUpcomingQuery, LaunchesUpcomingQueryVariables> {
     document = LaunchesUpcomingDocument;
     
     constructor(apollo: Apollo.Apollo) {
