@@ -1,15 +1,10 @@
 module.exports = {
-    // mode: 'jit',
     future: {
         removeDeprecatedGapUtilities: true,
         purgeLayersByDefault: true
     },
-    purge: ['./src/**/*.{html,ts,sass}'],
-    darkMode: false, // or 'media' or 'class'
+    content: ['./src/**/*.{html,ts,sass}'],
     theme: {
-        extend: {}
-    },
-    variants: {
         extend: {}
     },
     plugins: [
