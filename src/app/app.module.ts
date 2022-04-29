@@ -16,7 +16,7 @@ import { AuthTokenInterceptor } from './services/auth-token.interceptor'
 import { StoreRouterConnectingModule } from '@ngrx/router-store'
 import { CustomSerializer } from './store/router/custom-serializer';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component'
-import { APOLLO_OPTIONS } from 'apollo-angular'
+import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular'
 import { InMemoryCache } from '@apollo/client/core'
 import { HttpLink } from 'apollo-angular/http'
 
@@ -30,6 +30,7 @@ import { HttpLink } from 'apollo-angular/http'
     imports: [
         BrowserModule,
         AppRoutingModule,
+        ApolloModule,
         HttpClientModule,
         EffectsModule.forRoot([SharedEffects, AuthEffects]),
         StoreModule.forRoot(appReducer),
@@ -57,7 +58,7 @@ import { HttpLink } from 'apollo-angular/http'
                     })
                 }
             },
-            deps: [HttpLink]
+            deps: [HttpLink],
         }
     ],
     bootstrap: [AppComponent]
